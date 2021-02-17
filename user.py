@@ -1,34 +1,21 @@
 import bankAccount
 class User:
-    def __init__(self, name, email):
+    def __init__(self, name, *account_name):
         self.name = name
-        self.email = email
-        self.account = bankAccount.BankAccount(0.02, balance=0)
-    
-    def make_withdrawal(self, amount):
-        self.account = self.account.withdrawal(amount)
-        print(f"{self.name} withdrew ${amount}. Balance is {self.account.display_info()}.")
-        return self
+        self.account = {}
+        for i in range(len(account_name)):
+            self.account[account_name[i]] = bankAccount.BankAccount(self.name, account_name[i], int_rate=0.02, balance=0)    
 
-    def make_deposit(self, amount):
-        self.account = self.account.deposit(amount)
-        print(f"{self.name} made a deposit of ${amount}.")
-        return self
-    
-    def display_user_balance(self):
-        print(f"Here is {self.name}'s balance: {self.account.display_info()}.")
-        return self
+Greg = User("Greg", "BankOfAmerica", "CreditUnion")
+Forrest = User("Forrest", "BankOfChina", "PayPal")
 
-    def transfer_money(self, other_user, amount):
-        self.account = self.account.withdrawal(amount)
-        other_user.account = other_user.account.deposit(amount)
-        print(f"Transfered ${amount} from {self.name} to {other_user.name}.")
-        return self
 
-Greg = User("Greg", "greg@gmail.com")
-Forrest = User("Forrest", "forrest@outlook.com")
-Serena = User("Serena", "serena@qq.com")
 
-Greg.make_deposit(50).make_deposit(100).make_deposit(30).make_withdrawal(20)
-Forrest.make_deposit(50).make_deposit(200).transfer_money(Serena, 50)
-Serena.make_deposit(300).make_withdrawal(100)
+
+
+
+Greg.account["BankOfAmerica"].deposit(50).deposit(100).withdrawal(20).deposit(80).display_info()
+Greg.account["CreditUnion"].deposit(500).withdrawal(100).deposit(50).display_info()
+Forrest.account["BankOfChina"].deposit(500).display_info()
+Greg.account["CreditUnion"].transfer_money(Forrest.account["BankOfChina"], 50)
+Forrest.account["BankOfChina"].display_info()

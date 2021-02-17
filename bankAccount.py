@@ -1,6 +1,8 @@
 import math
 class BankAccount:
-    def __init__(self, int_rate, balance=0):
+    def __init__(self, user_name, account_name, int_rate, balance=0):
+        self.user_name = user_name
+        self.account_name = account_name
         self.int_rate = int_rate
         self.balance = balance
         if self.balance is float:
@@ -22,11 +24,21 @@ class BankAccount:
             self.balance = round(self.balance, 2)
         return self
     
-    def display_info(self):
+    def display_balance(self):
         return self.balance
+    
+    def display_info(self):
+        print(f"Here is {self.user_name}'s {self.account_name} account: ${self.display_balance()}.")
+        return self
     
     def yield_interest(self):
         self.balance += (self.balance*self.int_rate)
         if self.balance is float:
             self.balance = round(self.balance, 2)
+        return self
+    
+    def transfer_money(self, other_user, amount):
+        self = self.withdrawal(amount)
+        other_user = other_user.deposit(amount)
+        print(f"Transferred money from {self.user_name} to {other_user.user_name}.")
         return self
