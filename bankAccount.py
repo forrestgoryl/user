@@ -23,17 +23,10 @@ class BankAccount:
         return self
     
     def display_info(self):
-        print(f"This is a {self.int_rate * 100}% account and the balance is ${self.balance}.")
-        return self
+        return self.balance
     
     def yield_interest(self):
         self.balance += (self.balance*self.int_rate)
         if self.balance is float:
             self.balance = round(self.balance, 2)
         return self
-
-Forrest = BankAccount(0.01, 50)
-Serena = BankAccount(0.05, 2000)
-
-Forrest.deposit(50).deposit(200).deposit(1000).withdrawal(200).display_info().yield_interest().display_info()
-Serena.deposit(200).deposit(200).withdrawal(50).withdrawal(100).withdrawal(50).withdrawal(200).display_info().yield_interest().display_info()
