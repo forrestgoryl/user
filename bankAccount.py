@@ -32,9 +32,11 @@ class BankAccount:
         return self
     
     def yield_interest(self):
-        self.balance += (self.balance*self.int_rate)
+        interest_earned = self.balance*self.int_rate
+        self.balance += interest_earned
         if self.balance is float:
             self.balance = round(self.balance, 2)
+        print(f"Your account yielded interest: you earned ${interest_earned}. Your balance is now ${self.balance}.")
         return self
     
     def transfer_money(self, other_user, amount):

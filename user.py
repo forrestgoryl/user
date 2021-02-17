@@ -19,3 +19,4 @@ Greg.account["CreditUnion"].deposit(500).withdrawal(100).deposit(50).display_inf
 Forrest.account["BankOfChina"].deposit(500).display_info()
 Greg.account["CreditUnion"].transfer_money(Forrest.account["BankOfChina"], 50)
 Forrest.account["BankOfChina"].display_info()
+Forrest.account["BankOfChina"].yield_interest().display_info()
